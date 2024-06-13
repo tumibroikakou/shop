@@ -4,7 +4,7 @@ include 'pagination.php';
 
 // навигация и сортировка
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$perPage = 8;
+$perPage = 10;
 $offset = ($page - 1) * $perPage;
 $totalProducts = $mysqli->query("SELECT COUNT(*) AS count FROM goods")->fetch_assoc()['count'];
 $sortField = isset($_GET['sort']) ? $_GET['sort'] : 'id';
