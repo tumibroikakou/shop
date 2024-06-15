@@ -48,6 +48,29 @@
     margin-bottom: 10px;
 }
 
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.product-table th, .product-table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+.product-table th {
+    background-color: #f2f2f2;
+}
+.product-table img {
+    display: block;
+    margin: auto;
+}
+.product-actions {
+    text-align: center;
+}
+.product-actions input {
+    margin: 5px;
+}
+
 .pagination {
     text-align: center;
     margin-top: 20px;

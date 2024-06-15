@@ -4,7 +4,7 @@ include 'pagination.php';
 
 // навигация и сортировка
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$perPage = 10;
+$perPage = 9;
 $offset = ($page - 1) * $perPage;
 $totalProducts = $mysqli->query("SELECT COUNT(*) AS count FROM goods")->fetch_assoc()['count'];
 $sortField = isset($_GET['sort']) ? $_GET['sort'] : 'id';
@@ -33,39 +33,39 @@ $result = $mysqli->query($query);
 <body>
     <main class='container space-evenly'>
     <section>
-    <?php
-    echo "<table border='1'>
-    <tr>
-    <th><a href='?sort=name&order=".($sortOrder == 'ASC' ? 'DESC' : 'ASC')."'>Name</a></th>
-    <th>Category</th>
-    <th><a href='?sort=price&order=".($sortOrder == 'ASC' ? 'DESC' : 'ASC')."'>Price</a></th>
-    <th><a href='?sort=quantity&order=".($sortOrder == 'ASC' ? 'DESC' : 'ASC')."'>Quantity</a></th>
-    <th>Photo</th>
-    <th>Actions</th>
-    </tr>";
-
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-            <td>{$row['name']}</td>
-            <td>{$row['category_name']}</td>
-            <td>{$row['price']}</td>
-            <td>{$row['quantity']}</td>
-            <td><img src='{$row['photo_url']}' width='50'></td>
-            <td>
-                <form method='post'>
-                    <input type='hidden' name='id' value='{$row['id']}'>
-                    <input type='submit' name='edit' value='Edit'>
-                    <input type='submit' name='delete' value='Delete'>
-                </form>
-            </td>
+        <?php
+        echo "<table class='product-table'>
+            <tr>
+                <th><a href='?sort=name&order=".($sortOrder == 'ASC' ? 'DESC' : 'ASC')."'>Name ▼▲</a></th>
+                <th><a href='?sort=category_name&order=".($sortOrder == 'ASC' ? 'DESC' : 'ASC')."'>Category ▼▲</a></th>
+                <th><a href='?sort=price&order=".($sortOrder == 'ASC' ? 'DESC' : 'ASC')."'>Price ▼▲</a></th>
+                <th><a href='?sort=quantity&order=".($sortOrder == 'ASC' ? 'DESC' : 'ASC')."'>Quantity ▼▲</a></th>
+                <th>Photo</th>
+                <th>Actions</th>
             </tr>";
-    }
 
-    echo "</table>";
-    ?>
-        <div class="pagination">
-            <?php pagination($perPage, $page, $totalProducts); ?>
-        </div>
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                <td>{$row['name']}</td>
+                <td>{$row['category_name']}</td>
+                <td>{$row['price']}</td>
+                <td>{$row['quantity']}</td>
+                <td><img src='{$row['photo_url']}' width='50'></td>
+                <td class='product-actions'>
+                    <form method='post'>
+                        <input type='hidden' name='id' value='{$row['id']}'>
+                        <input type='submit' name='edit' value='Edit'>
+                        <input type='submit' name='delete' value='Delete'>
+                    </form>
+                </td>
+            </tr>";
+        }
+
+        echo "</table>";
+        ?>
+            <div class="pagination">
+                <?php pagination($perPage, $page, $totalProducts); ?>
+            </div>
     </section>
 
 
@@ -166,6 +166,8 @@ $result = $mysqli->query($query);
         </form>
         <a href="import_csv.php">Import Products from Excel</a>
     </div>
-</section>
+    </section>
+    </main>
 </body>
+</html>
 
