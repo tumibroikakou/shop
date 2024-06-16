@@ -34,7 +34,7 @@ $result = $mysqli->query($query);
     <div class="admin-link">
         <a href="src/admin.php">Admin Panel</a>
     </div>
-    <div class="container">
+    <section class="container">
         <?php
         // карточки
         while ($row = $result->fetch_assoc()) {
@@ -47,7 +47,7 @@ $result = $mysqli->query($query);
             echo "</div>";
         }
         ?>
-    </div>
+    </section>
 
     <!-- навигация -->
     <div class="pagination">
